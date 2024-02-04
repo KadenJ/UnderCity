@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4ebkc5gspx75"]
+
+[ext_resource type="Script" path="res://Player/scripts/Player.gd" id="1_n30jx"]
+[ext_resource type="Texture2D" uid="uid://duab2vt3r2by6" path="res://icon.svg" id="2_6d8j7"]
+[ext_resource type="Script" path="res://Player/PlayerMovementData.gd" id="2_yrweo"]
+[ext_resource type="Script" path="res://Player/Health.gd" id="4_43s5q"]
+
+[sub_resource type="Resource" id="Resource_eu8jy"]
+script = ExtResource("2_yrweo")
+speed = 750.0
+wallJumpSpeed = 750
+acceleration = 3000
+friction = 4500
+jumpVelocity = -1000.0
+gravityScale = 2.0
+airResistance = 250
+airExcelleration = 400
+dodgeSpeed = 700
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kkp7f"]
+size = Vector2(130, 125)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_n30jx")
+movement_data = SubResource("Resource_eu8jy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_kkp7f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6d8j7")
+
+[node name="coyoteJump" type="Timer" parent="."]
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("4_43s5q")
