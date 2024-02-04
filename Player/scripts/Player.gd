@@ -31,7 +31,7 @@ func _physics_process(delta):
 	#handle acceleration
 	movement(direction, delta)
 	
-	#updateAnim(direction)
+	updateAnim(direction)
 	applyAirResistance(direction, delta)
 	move_and_slide()
 	var just_left_ledge = was_on_floor and not is_on_floor() and velocity.y >= 0
@@ -96,4 +96,16 @@ func applyAirResistance(input_axis, delta):
 	if input_axis==0 && !is_on_floor():
 		velocity.x = move_toward(velocity.x, 0, movement_data.airResistance * delta)
 
-
+func updateAnim(input_axis):
+	if(input_axis!=0) && canMove == true:
+		$AnimatedSprite2D.flip_h = (input_axis < 0)
+		$AnimationPlayer.play("run")
+	else:
+		if canMove == true:
+			$AnimationPlayer.play("idle")
+		
+	if not is_on_floor():
+		if canMove == true:
+			$AnimationPlayer.play("jump")
+		if velocity.y > 0:
+			$AnimationPlayer.play("fall")
