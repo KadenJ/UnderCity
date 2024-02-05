@@ -1,4 +1,5 @@
 extends CharacterBody2D
+#sprite by https://chierit.itch.io/elementals-wind-hashashin
 
 
 const SPEED = 300.0
@@ -60,7 +61,7 @@ func handleJump(delta):
 		if is_on_floor() or coyote_jump.time_left > 0.00:
 			if Input.is_action_just_pressed("jump"):
 				velocity.y = movement_data.jumpVelocity
-		#double jump
+		#double jump add effect
 		if not is_on_floor() && coyote_jump.timeout:
 			if Input.is_action_just_pressed("jump") && airAction && $Health.stamina > 0:
 				velocity.y = movement_data.jumpVelocity
@@ -101,7 +102,7 @@ func updateAnim(input_axis):
 		$AnimatedSprite2D.flip_h = (input_axis < 0)
 		$AnimationPlayer.play("run")
 	else:
-		if canMove == true:
+		if canMove == true :
 			$AnimationPlayer.play("idle")
 		
 	if not is_on_floor():

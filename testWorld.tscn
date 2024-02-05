@@ -12,7 +12,7 @@ size = Vector2(1549, 9)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(666.5, 473.5)
+position = Vector2(667, 473)
 shape = SubResource("RectangleShape2D_2ll8l")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
@@ -21,4 +21,4 @@ scale = Vector2(12.0391, 0.0546875)
 texture = ExtResource("1_3l1xp")
 
 [node name="Player" parent="." instance=ExtResource("1_hqdv2")]
-position = Vector2(165, 273)
+position = Vector2(163, 273)
