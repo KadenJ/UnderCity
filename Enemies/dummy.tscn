@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bhmiand4f3xss"]
 
 [ext_resource type="Texture2D" uid="uid://duab2vt3r2by6" path="res://icon.svg" id="1_llbh2"]
-[ext_resource type="Script" path="res://Enemies/EnemyHealth.gd" id="2_d2rec"]
+[ext_resource type="Script" path="res://Enemies/essential scripts/EnemyHealth.gd" id="2_ohbo4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfalx"]
 size = Vector2(116, 121)
@@ -19,5 +19,5 @@ shape = SubResource("RectangleShape2D_jfalx")
 texture = ExtResource("1_llbh2")
 
 [node name="EnemyHealth" type="Node" parent="."]
-script = ExtResource("2_d2rec")
-maxHealth = 4
+script = ExtResource("2_ohbo4")
+maxHealth = 20
