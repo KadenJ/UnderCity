@@ -224,6 +224,18 @@ tracks/2/keys = {
 "update": 1,
 "values": []
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BATTLE/Attack/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_4id1w"]
 resource_name = "attack2"
@@ -264,6 +276,18 @@ tracks/2/keys = {
 "update": 1,
 "values": []
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BATTLE/Attack/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_8q05i"]
 resource_name = "attack3"
@@ -287,10 +311,10 @@ tracks/1/path = NodePath("AnimatedSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [13, 14, 15, 16, 17, 18, 20, 19, 20, 21, 22, 23, 24, 25]
+"values": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -303,6 +327,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(),
 "update": 1,
 "values": []
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BATTLE/Attack/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wdr7w"]
@@ -681,6 +717,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hadhv"]
+size = Vector2(28, 20)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 0
@@ -709,17 +746,21 @@ animation = &"AttackFull"
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="BATTLE" type="Node" parent="."]
+[node name="BATTLE" type="Node2D" parent="."]
 
 [node name="Attack" type="Area2D" parent="BATTLE"]
-collision_mask = 3
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("5_8ndrn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BATTLE/Attack"]
-position = Vector2(33, 40)
+position = Vector2(29, 40)
 shape = SubResource("RectangleShape2D_hadhv")
+disabled = true
+debug_color = Color(0.72549, 0.12549, 0.215686, 0.807843)
 
 [node name="betweenAttacks" type="Timer" parent="BATTLE/Attack"]
 one_shot = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="BATTLE/Attack" method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="BATTLE/Attack" to="BATTLE/Attack" method="_on_body_entered"]

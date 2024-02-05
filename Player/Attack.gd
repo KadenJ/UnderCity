@@ -1,13 +1,15 @@
 extends Area2D
 @onready var animation_player = $"../../AnimationPlayer"
+@export var damage = 3
 
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	pass # Replace with function body.
 
 var followUp = false
 func _process(delta):
+	
 	if Input.is_action_just_pressed("attack"):
 		if $betweenAttacks.is_stopped():
 			$"../..".canMove = false
@@ -15,6 +17,8 @@ func _process(delta):
 			animation_player.play("attack1")
 		else:
 			followUp = true
+		
+		
 		
 
 func _on_animation_player_animation_finished(anim_name):
@@ -37,3 +41,9 @@ func _on_animation_player_animation_finished(anim_name):
 				$"../../AnimationPlayer".play("attack3")
 				$betweenAttacks.stop()
 				followUp = false
+
+
+func _on_body_entered(body):
+	for child in body.get_children():
+		if child is Enemy:
+			child.hit(damage)

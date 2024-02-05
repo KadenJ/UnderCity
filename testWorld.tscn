@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cx3m18kxu0t3g"]
+[gd_scene load_steps=5 format=3 uid="uid://cx3m18kxu0t3g"]
 
 [ext_resource type="Texture2D" uid="uid://duab2vt3r2by6" path="res://icon.svg" id="1_3l1xp"]
 [ext_resource type="PackedScene" uid="uid://b4ebkc5gspx75" path="res://Player/player.tscn" id="1_hqdv2"]
+[ext_resource type="PackedScene" uid="uid://bhmiand4f3xss" path="res://Enemies/dummy.tscn" id="3_hhrlx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ll8l"]
 size = Vector2(1549, 9)
@@ -22,3 +23,5 @@ texture = ExtResource("1_3l1xp")
 
 [node name="Player" parent="." instance=ExtResource("1_hqdv2")]
 position = Vector2(163, 273)
+
+[node name="Dummy" parent="." instance=ExtResource("3_hhrlx")]
