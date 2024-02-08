@@ -770,7 +770,7 @@ size = Vector2(28, 20)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvhob"]
 height = 42.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 0
 script = ExtResource("1_n30jx")
 movement_data = SubResource("Resource_eu8jy")
@@ -793,7 +793,6 @@ libraries = {
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dcj1y")
 animation = &"AttackFull"
-frame = 25
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
@@ -808,7 +807,6 @@ script = ExtResource("5_6046r")
 [node name="sword" type="CollisionShape2D" parent="BATTLE/Attack"]
 position = Vector2(29, 40)
 shape = SubResource("RectangleShape2D_hadhv")
-disabled = true
 debug_color = Color(0.72549, 0.12549, 0.215686, 0.807843)
 
 [node name="tornado" type="CollisionShape2D" parent="BATTLE/Attack"]

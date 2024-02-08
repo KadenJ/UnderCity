@@ -46,4 +46,6 @@ func _on_animation_player_animation_finished(anim_name):
 func _on_body_entered(body):
 	for child in body.get_children():
 		if child is Enemy:
-			child.hit(damage)
+			var EnemyDist : Vector2
+			EnemyDist = child.get_parent().position - to_global(get_parent().position)
+			child.hit(damage, EnemyDist)

@@ -20,3 +20,10 @@ boss health bar
 Collectable-
 sprite
 hazardArea: detects player collision
+
+
+
+
+vector2 to player from enemy body
+get distance using vector2
+send vector2 to enemy throgh hit and set enemy velocity to it
