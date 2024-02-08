@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Enemies/basicEnemy.gd" id="1_7fpql"]
 [ext_resource type="Texture2D" uid="uid://duab2vt3r2by6" path="res://icon.svg" id="1_llbh2"]
 [ext_resource type="Script" path="res://Enemies/essential scripts/EnemyHealth.gd" id="2_ohbo4"]
-[ext_resource type="PackedScene" uid="uid://jxl2r6onhym1" path="res://Enemies/moveTypes/standardEnemyMovement.tscn" id="2_qmdnv"]
+[ext_resource type="Script" path="res://Enemies/moveTypes/Movement.gd" id="4_xe1ax"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfalx"]
 size = Vector2(116, 121)
@@ -13,9 +13,6 @@ position = Vector2(353, 438)
 scale = Vector2(0.480002, 0.48)
 collision_layer = 2
 script = ExtResource("1_7fpql")
-speed = 100.0
-
-[node name="standardEnemyMovement" parent="." instance=ExtResource("2_qmdnv")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.00006, -2.5)
@@ -29,5 +26,9 @@ texture = ExtResource("1_llbh2")
 [node name="EnemyHealth" type="Node" parent="."]
 script = ExtResource("2_ohbo4")
 maxHealth = 20
+
+[node name="Movement" type="Node" parent="."]
+script = ExtResource("4_xe1ax")
+speed = 400.0
 
 [connection signal="dead" from="EnemyHealth" to="." method="_on_enemy_health_dead"]

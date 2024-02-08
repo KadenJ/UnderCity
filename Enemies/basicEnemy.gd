@@ -4,7 +4,7 @@ enum STATES {IDLE, MOVE, HURT, DEAD}
 var currentState : STATES
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 #@export var knockback : Vector2 = Vector2(100,0)
-@export var speed : float
+
 var playerPos
 
 func _ready():
@@ -19,7 +19,7 @@ func _physics_process(delta):
 		STATES.IDLE:
 			pass
 		STATES.MOVE:
-			movement(playerPos)
+			movement(playerPos, delta)
 		STATES.DEAD:
 			queue_free()
 		STATES.HURT: #does knockback and invincibility for 
@@ -35,14 +35,14 @@ func _physics_process(delta):
 
 func apply_gravity(delta):
 	if not is_on_floor():
+		print("t")
 		velocity.y += gravity * delta
 
 
-func movement(pos):
+func movement(pos, delta):
 	#velocity = pos 
-	pass
-	var moveEnemy = get_node("standardEnemyMovement")
-	moveEnemy.move(pos)
+	var moveEnemy = get_node("Movement")
+	moveEnemy.move(pos, delta)
 
 func changeState(newState : STATES):
 	currentState = newState
