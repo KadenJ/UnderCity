@@ -11,12 +11,14 @@ var followUp = false
 func _process(delta):
 	
 	if Input.is_action_just_pressed("attack"):
-		if $betweenAttacks.is_stopped():
-			$"../..".canMove = false
-			$betweenAttacks.start(.6)
-			animation_player.play("attack1")
-		else:
-			followUp = true
+		if $"../..".state == $"../..".STATES.CANACTION:
+			if $betweenAttacks.is_stopped():
+				$"../..".canMove = false
+				$betweenAttacks.start(.6)
+				animation_player.play("attack1")
+				
+			else:
+				followUp = true
 		
 		
 		

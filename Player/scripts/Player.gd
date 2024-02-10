@@ -1,6 +1,8 @@
 extends CharacterBody2D
 #sprite by https://chierit.itch.io/elementals-wind-hashashin
-
+enum STATES{CANACTION, DODGE, HURT}
+var state = STATES.CANACTION
+#at end of every state go back to canAction
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -21,12 +23,27 @@ func _physics_process(delta):
 	var direction = Input.get_axis("left", "right")
 	var was_on_floor = is_on_floor()
 	
+	match state:
+		STATES.DODGE:
+			if canMove == true:
+				#play dodge anim
+				canMove = false
+				$AnimationPlayer.play("dodge")
+				if $AnimatedSprite2D.flip_h:
+					velocity.x = move_toward(velocity.x, movement_data.dodgeSpeed * -1, 900)
+				else: velocity.x = move_toward(velocity.x, movement_data.dodgeSpeed, 900)
+				
+			
+		STATES.HURT:
+			$Health.health -= 1
+			state = STATES.CANACTION
+	
 	# Add the gravity.
 	apply_gravity(delta)
 	
 	handleJump(delta)
 	handleWallJump()
-	#flip()
+	inputCheck()
 	
 	
 	#handle acceleration
@@ -88,6 +105,11 @@ func handleWallJump():
 			velocity.y = movement_data.jumpVelocity
 			newWallJump -= 50
 			#$Health.stamina-=1
+
+func inputCheck():
+	if Input.is_action_just_pressed("dodge"):
+		state = STATES.DODGE
+
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -105,7 +127,7 @@ func updateAnim(input_axis):
 	else:
 		if canMove == true :
 			$AnimationPlayer.play("idle")
-		
+	
 	if not is_on_floor():
 		if velocity.y < 0:
 			$AnimationPlayer.play("jump")
@@ -114,3 +136,11 @@ func updateAnim(input_axis):
 	#prevents infinite fall animation
 	if $AnimationPlayer.current_animation == "fall" && is_on_floor():
 		canMove = true
+
+
+func _on_animation_player_animation_finished(anim_name):
+	match anim_name:
+		"dodge":
+			velocity.x = 0
+			canMove = true
+			state = STATES.CANACTION

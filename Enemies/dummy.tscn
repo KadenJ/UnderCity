@@ -1,27 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhmiand4f3xss"]
+[gd_scene load_steps=7 format=3 uid="uid://bhmiand4f3xss"]
 
-[ext_resource type="Script" path="res://Enemies/basicEnemy.gd" id="1_7fpql"]
 [ext_resource type="Texture2D" uid="uid://duab2vt3r2by6" path="res://icon.svg" id="1_llbh2"]
+[ext_resource type="Script" path="res://Enemies/essential scripts/basicEnemy.gd" id="1_o234o"]
 [ext_resource type="Script" path="res://Enemies/essential scripts/EnemyHealth.gd" id="2_ohbo4"]
 [ext_resource type="Script" path="res://Enemies/moveTypes/Movement.gd" id="4_xe1ax"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jfalx"]
 size = Vector2(116, 121)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_nrqfv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_llbh2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
 [node name="Dummy" type="CharacterBody2D"]
 position = Vector2(353, 438)
 scale = Vector2(0.480002, 0.48)
 collision_layer = 2
-script = ExtResource("1_7fpql")
+script = ExtResource("1_o234o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.00006, -2.5)
 shape = SubResource("RectangleShape2D_jfalx")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_llbh2")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nrqfv")
+animation = &"idle"
 
 [node name="EnemyHealth" type="Node" parent="."]
 script = ExtResource("2_ohbo4")

@@ -17,7 +17,7 @@ func _physics_process(delta):
 	
 	match currentState:
 		STATES.IDLE:
-			pass
+			changeState(STATES.MOVE)
 		STATES.MOVE:
 			movement(playerPos, delta)
 		STATES.DEAD:
@@ -35,12 +35,10 @@ func _physics_process(delta):
 
 func apply_gravity(delta):
 	if not is_on_floor():
-		print("t")
 		velocity.y += gravity * delta
 
 
 func movement(pos, delta):
-	#velocity = pos 
 	var moveEnemy = get_node("Movement")
 	moveEnemy.move(pos, delta)
 
