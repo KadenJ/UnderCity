@@ -1,22 +1,10 @@
-[gd_scene load_steps=74 format=3 uid="uid://b4ebkc5gspx75"]
+[gd_scene load_steps=73 format=3 uid="uid://b4ebkc5gspx75"]
 
 [ext_resource type="Script" path="res://Player/scripts/Player.gd" id="1_n30jx"]
-[ext_resource type="Script" path="res://Player/PlayerMovementData.gd" id="2_yrweo"]
+[ext_resource type="Resource" uid="uid://bejumdbc4u6co" path="res://Player/movements/betterMovement.tres" id="2_7smrw"]
 [ext_resource type="Script" path="res://Player/scripts/Health.gd" id="3_47wgu"]
 [ext_resource type="Texture2D" uid="uid://b8me3yrb85uae" path="res://Player/sprite/wind_SpriteSheet_288x128.png" id="4_3rvsf"]
 [ext_resource type="Script" path="res://Player/scripts/Attack.gd" id="5_6046r"]
-
-[sub_resource type="Resource" id="Resource_eu8jy"]
-script = ExtResource("2_yrweo")
-speed = 750.0
-wallJumpSpeed = 750
-acceleration = 3000
-friction = 4500
-jumpVelocity = -1000.0
-gravityScale = 2.0
-airResistance = 250
-airExcelleration = 400
-dodgeSpeed = 900
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kkp7f"]
 size = Vector2(34, 46)
@@ -201,6 +189,46 @@ tracks/5/keys = {
 "values": [false, true]
 }
 
+[sub_resource type="Animation" id="Animation_3koyd"]
+resource_name = "dodge"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"dodge"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:sprite_frames")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
 [sub_resource type="Animation" id="Animation_6hbqe"]
 resource_name = "fall"
 length = 0.3
@@ -375,46 +403,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 7, 0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:sprite_frames")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
-
-[sub_resource type="Animation" id="Animation_3koyd"]
-resource_name = "dodge"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"dodge"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -859,9 +847,9 @@ size = Vector2(28, 20)
 height = 42.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-collision_layer = 0
+collision_layer = 4
 script = ExtResource("1_n30jx")
-movement_data = SubResource("Resource_eu8jy")
+movement_data = ExtResource("2_7smrw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 40)
@@ -880,8 +868,7 @@ libraries = {
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dcj1y")
-animation = &"dodge"
-frame = 4
+animation = &"AttackFull"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
@@ -896,7 +883,6 @@ script = ExtResource("5_6046r")
 [node name="sword" type="CollisionShape2D" parent="BATTLE/Attack"]
 position = Vector2(29, 40)
 shape = SubResource("RectangleShape2D_hadhv")
-disabled = true
 debug_color = Color(0.72549, 0.12549, 0.215686, 0.807843)
 
 [node name="tornado" type="CollisionShape2D" parent="BATTLE/Attack"]

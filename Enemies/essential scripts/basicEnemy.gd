@@ -8,7 +8,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var playerPos
 
 func _ready():
-	currentState = STATES.MOVE
+	currentState = STATES.IDLE
 
 func _physics_process(delta):
 	var playerGroup = get_tree().get_nodes_in_group("player")
@@ -16,8 +16,8 @@ func _physics_process(delta):
 		playerPos = to_local(playerGroup[0].position) 
 	
 	match currentState:
-		STATES.IDLE:
-			changeState(STATES.MOVE)
+		STATES.IDLE:#do idle anim if area bo
+			velocity= Vector2.ZERO
 		STATES.MOVE:
 			movement(playerPos, delta)
 		STATES.DEAD:
@@ -48,4 +48,8 @@ func changeState(newState : STATES):
 func _on_enemy_health_dead():
 	changeState(STATES.DEAD)
 
+func _on_area_2d_body_entered(_body):#Idle -> Move
+	changeState(STATES.MOVE)
 
+func _on_area_2d_body_exited(_body):#Move -> Idle
+	changeState(STATES.IDLE)
