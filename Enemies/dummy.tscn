@@ -19,8 +19,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7oxq"]
-size = Vector2(1743.74, 116.667)
+[sub_resource type="CircleShape2D" id="CircleShape2D_gh0c7"]
+radius = 667.735
 
 [node name="Dummy" type="CharacterBody2D"]
 position = Vector2(353, 438)
@@ -52,7 +52,7 @@ collision_mask = 4
 
 [node name="sight" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-3.125, -6.24994)
-shape = SubResource("RectangleShape2D_a7oxq")
+shape = SubResource("CircleShape2D_gh0c7")
 debug_color = Color(0.870588, 0.898039, 0.270588, 0.419608)
 
 [connection signal="dead" from="EnemyHealth" to="." method="_on_enemy_health_dead"]

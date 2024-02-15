@@ -883,6 +883,7 @@ script = ExtResource("5_6046r")
 [node name="sword" type="CollisionShape2D" parent="BATTLE/Attack"]
 position = Vector2(29, 40)
 shape = SubResource("RectangleShape2D_hadhv")
+disabled = true
 debug_color = Color(0.72549, 0.12549, 0.215686, 0.807843)
 
 [node name="tornado" type="CollisionShape2D" parent="BATTLE/Attack"]
